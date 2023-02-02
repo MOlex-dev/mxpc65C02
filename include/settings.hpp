@@ -1,0 +1,8 @@
+//
+// Created by RavenFox on 02/02/2023.
+//
+
+#ifndef MXPC65C02_SETTINGS_HPP
+#define MXPC65C02_SETTINGS_HPP
+
+#endif //MXPC65C02_SETTINGS_HPP

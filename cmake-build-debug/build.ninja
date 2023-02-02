@@ -85,6 +85,18 @@ build CMakeFiles/mxpc65C02.dir/src/exceptions/memory_exception.cpp.obj: CXX_COMP
   OBJECT_DIR = CMakeFiles\mxpc65C02.dir
   OBJECT_FILE_DIR = CMakeFiles\mxpc65C02.dir\src\exceptions
 
+build CMakeFiles/mxpc65C02.dir/src/settings.cpp.obj: CXX_COMPILER__mxpc65C02_Debug C$:/Users/RavenFox/Desktop/LNTU/_Курсові/Кваліфікаційна$ робота$ Бакалавр/прог_бакалавр_Міщук_ОС_іпз41_2023/mxpc65C02/src/settings.cpp || cmake_object_order_depends_target_mxpc65C02
+  DEP_FILE = CMakeFiles\mxpc65C02.dir\src\settings.cpp.obj.d
+  FLAGS = -g -std=gnu++23
+  OBJECT_DIR = CMakeFiles\mxpc65C02.dir
+  OBJECT_FILE_DIR = CMakeFiles\mxpc65C02.dir\src
+
+build CMakeFiles/mxpc65C02.dir/src/exceptions/cmd_exception.cpp.obj: CXX_COMPILER__mxpc65C02_Debug C$:/Users/RavenFox/Desktop/LNTU/_Курсові/Кваліфікаційна$ робота$ Бакалавр/прог_бакалавр_Міщук_ОС_іпз41_2023/mxpc65C02/src/exceptions/cmd_exception.cpp || cmake_object_order_depends_target_mxpc65C02
+  DEP_FILE = CMakeFiles\mxpc65C02.dir\src\exceptions\cmd_exception.cpp.obj.d
+  FLAGS = -g -std=gnu++23
+  OBJECT_DIR = CMakeFiles\mxpc65C02.dir
+  OBJECT_FILE_DIR = CMakeFiles\mxpc65C02.dir\src\exceptions
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target mxpc65C02
@@ -93,7 +105,7 @@ build CMakeFiles/mxpc65C02.dir/src/exceptions/memory_exception.cpp.obj: CXX_COMP
 #############################################
 # Link the executable mxpc65C02.exe
 
-build mxpc65C02.exe: CXX_EXECUTABLE_LINKER__mxpc65C02_Debug CMakeFiles/mxpc65C02.dir/src/main.cpp.obj CMakeFiles/mxpc65C02.dir/src/util.cpp.obj CMakeFiles/mxpc65C02.dir/src/frequency.cpp.obj CMakeFiles/mxpc65C02.dir/src/memory.cpp.obj CMakeFiles/mxpc65C02.dir/src/exceptions/mxpc_exception.cpp.obj CMakeFiles/mxpc65C02.dir/src/exceptions/memory_exception.cpp.obj
+build mxpc65C02.exe: CXX_EXECUTABLE_LINKER__mxpc65C02_Debug CMakeFiles/mxpc65C02.dir/src/main.cpp.obj CMakeFiles/mxpc65C02.dir/src/util.cpp.obj CMakeFiles/mxpc65C02.dir/src/frequency.cpp.obj CMakeFiles/mxpc65C02.dir/src/memory.cpp.obj CMakeFiles/mxpc65C02.dir/src/exceptions/mxpc_exception.cpp.obj CMakeFiles/mxpc65C02.dir/src/exceptions/memory_exception.cpp.obj CMakeFiles/mxpc65C02.dir/src/settings.cpp.obj CMakeFiles/mxpc65C02.dir/src/exceptions/cmd_exception.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\mxpc65C02.dir
