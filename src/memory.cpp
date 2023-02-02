@@ -82,20 +82,20 @@ max_address = 0xFF'FF;
 std::ostream&           mxpc65C02::
 operator<<(std::ostream &os, const memory &mem)
 {
-    std::cout << '\n' << std::hex << std::uppercase << std::setw(5) << ' ' << '|';
+    os << '\n' << std::hex << std::uppercase << std::setw(5) << ' ' << '|';
     for (uint8_t i = 0; i < 0x10; ++i) {
-        std::cout << ' ' << std::setfill('0') << std::setw(2) << +i;
+        os << ' ' << std::setfill('0') << std::setw(2) << +i;
     }
 
-    std::cout << '\n' << std::setfill('-') << std::setw(54) << '-';
+    os << '\n' << std::setfill('-') << std::setw(54) << '-';
     for (std::size_t i = 0; i < memory::memory_size; ) {
         if (i % 0x10 == 0) {
-            std::cout << '\n';
-            std::cout << std::setfill('0') << std::setw(4) << i << " |";
+            os << '\n';
+            os << std::setfill('0') << std::setw(4) << i << " |";
         }
-        std::cout << ' ' << std::setfill('0') << std::setw(2) << +mem.m_memory[i];
+        os << ' ' << std::setfill('0') << std::setw(2) << +mem.m_memory[i];
         ++i;
     }
-    std::cout << std::endl;
+    os << std::endl;
     return os;
 }

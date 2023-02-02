@@ -4,9 +4,14 @@
  *-----------------------------------*/
 
 #include <iostream>
+#include <vector>
 
 #include "../include/util.hpp"
 #include "../include/memory.hpp"
+
+#define PRINT_SETTINGS(settings) std::cout << settings << std::endl;
+#define PRINT_ARGUMENTS(cmd_arguments) for (const auto &arg : cmd_arguments) std::cout << arg << std::endl;
+#define PRINT_MEMORY(memory_instance) std::cout << memory_instance << std::endl;
 
 using namespace mxpc65C02;
 using namespace mxpc65C02::exception;
@@ -14,8 +19,14 @@ using namespace mxpc65C02::exception;
 
 int main(int argc, char **argv)
 {
-    try {
+    std::vector<std::string> cmd_arguments(argc);
+    for (int i = 0; i < argc; ++i) {
+        cmd_arguments[i] = std::string(argv[i]);
+    }
 
+    try {
+        auto config = cmd_to_settings(cmd_arguments);
+        PRINT_SETTINGS(config)
 
 
         memory computer_memory;
@@ -27,7 +38,8 @@ int main(int argc, char **argv)
         computer_memory.load_program(program);
 
 
-        std::cout << computer_memory << std::endl;
+        //PRINT_MEMORY(computer_memory)
+
 
 
 

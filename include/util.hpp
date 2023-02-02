@@ -8,6 +8,11 @@
 #pragma once
 
 #include <fstream>
+#include <vector>
+#include <string>
+
+#include "settings.hpp"
+#include "exceptions/cmd_exception.hpp"
 
 
 namespace mxpc65C02
@@ -17,4 +22,6 @@ namespace mxpc65C02
 
     byte_t lower_word(const word_t word) noexcept;
     byte_t higher_word(const word_t word) noexcept;
+
+    settings cmd_to_settings(const std::vector<std::string> &cmd_args);
 }

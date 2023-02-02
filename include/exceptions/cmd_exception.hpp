@@ -1,8 +1,20 @@
-//
-// Created by RavenFox on 02/02/2023.
-//
+/*-----------------------------------*
+ |     W65C02 Processor Simulator    |
+ |           CMD Exception           |
+ |                                   |
+ |         Author: MOlex-dev         |
+ *-----------------------------------*/
 
-#ifndef MXPC65C02_CMD_EXCEPTION_HPP
-#define MXPC65C02_CMD_EXCEPTION_HPP
+#pragma once
 
-#endif //MXPC65C02_CMD_EXCEPTION_HPP
+#include "mxpc_exception.hpp"
+
+
+namespace mxpc65C02::exception
+{
+    class cmd_exception : public mxpc_exception
+    {
+    public:
+        explicit cmd_exception(std::string what) noexcept;
+    };
+}
