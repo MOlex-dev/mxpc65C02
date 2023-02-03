@@ -9,9 +9,9 @@
 #include "../include/util.hpp"
 #include "../include/memory.hpp"
 
-#define PRINT_SETTINGS(settings) std::cout << settings << std::endl;
-#define PRINT_ARGUMENTS(cmd_arguments) for (const auto &arg : cmd_arguments) std::cout << arg << std::endl;
-#define PRINT_MEMORY(memory_instance) std::cout << memory_instance << std::endl;
+#define DEBUG_SETTINGS
+#define DEBUG_PROGRAM_LOADING
+#define DEBUG_MEMORY
 
 using namespace mxpc65C02;
 using namespace mxpc65C02::exception;
@@ -26,20 +26,26 @@ int main(int argc, char **argv)
 
     try {
         auto config = cmd_to_settings(cmd_arguments);
-        PRINT_SETTINGS(config)
 
+#ifdef DEBUG_SETTINGS
+        std::cout << config << std::endl;
+#endif
+
+        const auto program = read_program_from_file(config.program_file_path());
+
+#ifdef DEBUG_PROGRAM_LOADING
+        for (std::size_t i = 0; i < program.size(); ++i) {
+            if (i % 0x10 == 0) { std::cout << '\n'; }
+            std::cout << std::right << std::hex << std::setfill('0') << std::setw(2) << +program.at(i) << ' ';
+        }
+#endif
 
         memory computer_memory;
-
-        std::vector<byte_t> program(0x12ff);
-        for (std::size_t i = 0; i < 0x12ff; ++i) {
-            program[i] = i * 2;
-        }
         computer_memory.load_program(program);
 
-
-        //PRINT_MEMORY(computer_memory)
-
+#ifdef DEBUG_MEMORY
+        std::cout << computer_memory << std::endl;
+#endif
 
 
 

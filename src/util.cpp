@@ -55,9 +55,39 @@ cmd_to_settings(const std::vector<std::string> &cmd_args)
         throw cmd_exception("No settings file path (*.cfg). Multiply declaration of a program file");
     }
 
+    settings config;
+    config.program_file_path(path_to_program);
+
+    // Parse settings
+    std::ifstream config_file(path_to_settings);
+    if (not config_file.is_open()) {
+        throw cmd_exception("Can't open configuration file: " + path_to_settings);
+    }
 
 
 
+    // TODO: WORK HERE
 
-    return settings {};
+
+    config_file.close();
+
+    return config;
+}
+
+std::vector<byte_t>     mxpc65C02::
+read_program_from_file(const std::string path)
+{
+    std::ifstream source_code_reader(path, std::ios::binary);
+    if (not source_code_reader.is_open()) {
+        throw cmd_exception("Can't open source code file at: " + path);
+    }
+
+    std::vector<byte_t> program_code;
+    char byte;
+    while (source_code_reader.get(byte)) {
+        program_code.push_back(static_cast<byte_t>(byte));
+    }
+    source_code_reader.close();
+
+    return program_code;
 }

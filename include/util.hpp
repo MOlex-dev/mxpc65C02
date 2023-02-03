@@ -23,5 +23,6 @@ namespace mxpc65C02
     byte_t lower_word(const word_t word) noexcept;
     byte_t higher_word(const word_t word) noexcept;
 
-    settings cmd_to_settings(const std::vector<std::string> &cmd_args);
+    settings    cmd_to_settings(const std::vector<std::string> &cmd_args);
+    std::vector<byte_t> read_program_from_file(const std::string path);
 }

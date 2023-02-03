@@ -45,6 +45,7 @@ namespace mxpc65C02
         friend std::ostream& operator<<(std::ostream &os, const settings &st);
         friend std::ostream& operator<<(std::ostream &os, const screen_mode &st);
     };
+
     std::ostream& operator<<(std::ostream &os, const settings::screen_mode &st);
     std::ostream& operator<<(std::ostream &os, const settings &st);
 }

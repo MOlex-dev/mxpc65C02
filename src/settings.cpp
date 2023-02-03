@@ -64,7 +64,7 @@ operator<<(std::ostream &os, const settings::screen_mode &st)
 std::ostream&           mxpc65C02::
 operator<<(std::ostream &os, const settings &st)
 {
-    os << '\n' << std::setw(15) << "Source file: " << st.m_prg_file_path;
+    os << std::setw(15) << "Source file: " << st.m_prg_file_path;
     os << '\n' << std::setw(15) << "Frequency: "   << st.m_frequency;
     os << '\n' << std::setw(15) << "Screen mode: " << st.m_screen_mode;
     return os;
