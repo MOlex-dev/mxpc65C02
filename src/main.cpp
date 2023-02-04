@@ -9,9 +9,9 @@
 #include "../include/util.hpp"
 #include "../include/memory.hpp"
 
-#define DEBUG_SETTINGS
-#define DEBUG_PROGRAM_LOADING
-#define DEBUG_MEMORY
+//#define DEBUG_SETTINGS
+//#define DEBUG_PROGRAM_LOADING
+//#define DEBUG_MEMORY
 
 using namespace mxpc65C02;
 using namespace mxpc65C02::exception;
@@ -46,6 +46,9 @@ int main(int argc, char **argv)
 #ifdef DEBUG_MEMORY
         std::cout << computer_memory << std::endl;
 #endif
+
+
+        //TODO: Continue here
 
 
 

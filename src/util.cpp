@@ -6,6 +6,7 @@
  *-----------------------------------*/
 
 #include "../include/util.hpp"
+#include "../include/settings.hpp"
 
 using namespace mxpc65C02;
 using mxpc65C02::exception::cmd_exception;
@@ -18,6 +19,24 @@ lower_word(const word_t word) noexcept
 byte_t                  mxpc65C02::
 higher_word(const word_t word) noexcept
 { return word / 0x1'00; }
+
+
+std::string             mxpc65C02::
+to_lower(const std::string &input) noexcept
+{
+    std::string res = input;
+    std::for_each(res.begin(), res.end(), [](auto &c) { c = std::tolower(c); });
+    return res;
+}
+
+std::string             mxpc65C02::
+to_upper(const std::string &input) noexcept
+{
+    std::string res = input;
+    std::for_each(res.begin(), res.end(), [](auto &c) { c = std::toupper(c); });
+    return res;
+}
+
 
 settings                mxpc65C02::
 cmd_to_settings(const std::vector<std::string> &cmd_args)
@@ -64,11 +83,63 @@ cmd_to_settings(const std::vector<std::string> &cmd_args)
         throw cmd_exception("Can't open configuration file: " + path_to_settings);
     }
 
+    std::string input_string;
+    std::size_t line = 1;
 
+    while (std::getline(config_file, input_string)) {
+        std::string proc_str = input_string;
 
-    // TODO: WORK HERE
+        auto rem_beg = std::remove(proc_str.begin(), proc_str.end(), ' ');
+        proc_str.erase(rem_beg, proc_str.end());
 
+        if (proc_str.empty()) {
+            ++line;
+            continue;
+        }
 
+        auto eq_pos = proc_str.find('=');
+        if (eq_pos == std::string::npos) {
+            throw cmd_exception("Settings file parsing error:\nAt line: " + std::to_string(line)
+                                + ": " + input_string + R"(: no '=' sign)");
+        }
+
+        std::string property, value;
+        property = proc_str.substr(0, eq_pos);
+        value = proc_str.substr(eq_pos + 1, proc_str.length() - 1);
+
+        if (property.empty()) {
+            throw cmd_exception("Settings file parsing error:\nAt line: " + std::to_string(line) + ": "
+                                + "No property");
+        }
+        if (value.empty()) {
+            throw cmd_exception("Settings file parsing error:\nAt line: " + std::to_string(line) + ": "
+                                + "No value");
+        }
+
+        if (property ==  "FREQUENCY") {
+            hertz_t property_freq;
+            if (std::find_if(value.begin(), value.end(), [](const auto &c) {
+                return not std::isdigit(c);
+            }) != value.end()) {
+                throw cmd_exception("Settings file parsing error:\nAt line: " + std::to_string(line) + ": "
+                                    + "Can't parse to number: " + value);
+            }
+            config.frequency_cpu(std::strtoull(value.c_str(), nullptr, 10));
+        } else if ( property == "SCREEN_MODE") {
+            if (value == "BITMAP_DISPLAY") {
+                config.monitor_mode(settings::screen_mode::BITMAP_DISPLAY);
+            } else if (value == "SYMBOLIC_DISPLAY") {
+                config.monitor_mode(settings::screen_mode::SYMBOLIC_DISPLAY);
+            } else {
+                throw cmd_exception("Settings file parsing error:\nAt line: " + std::to_string(line) + ": "
+                                    + "Unknown value: " + value);
+            }
+        } else {
+            throw cmd_exception("Settings file parsing error:\nAt line: " + std::to_string(line) + ": "
+                                + "Unknown property: " + property);
+        }
+        ++line;
+    }
     config_file.close();
 
     return config;
